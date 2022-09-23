@@ -1,9 +1,14 @@
-import { AppProps } from "next/app";
+import type { AppContext, AppInitialProps, AppLayoutProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
+import { NextComponentType } from "next";
 
-export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
+const DareplayApp: NextComponentType<
+  AppContext,
+  AppInitialProps,
+  AppLayoutProps
+> = ({ Component, pageProps }) => {
+  const getLayout = Component.getLayout || ((page: React.ReactNode) => page);
 
   return (
     <>
@@ -20,10 +25,14 @@ export default function App(props: AppProps) {
         withNormalizeCSS
         theme={{
           colorScheme: "dark",
+          fontFamily: "Poppins, sans-serif",
+          fontFamilyMonospace: "Monaco, Courier, monospace",
         }}
       >
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </MantineProvider>
     </>
   );
-}
+};
+
+export default DareplayApp;

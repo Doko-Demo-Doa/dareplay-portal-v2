@@ -1,7 +1,7 @@
 import MasterLayout from "~/layouts/master-layout";
 
 const Home = () => {
-  return <>Index page</>;
+  return <div>Test</div>;
 };
 
 Home.getLayout = function getLayout(page: React.ReactNode) {

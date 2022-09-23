@@ -1,7 +1,6 @@
-import { AppShell, Container, Header, Text } from "@mantine/core";
+import { AppShell, Container, Header } from "@mantine/core";
 import Head from "next/head";
-import { useNetwork } from "wagmi";
-import dynamic from "next/dynamic";
+
 import AppHeader from "~/shared/components/_common/app-header";
 
 interface Props {
@@ -11,8 +10,6 @@ interface Props {
 }
 
 const MasterLayout: React.FC<Props> = ({ children, title, description }) => {
-  const { chain } = useNetwork();
-
   return (
     <>
       <Head>
@@ -24,7 +21,7 @@ const MasterLayout: React.FC<Props> = ({ children, title, description }) => {
       <AppShell
         padding="md"
         header={
-          <Header height={60}>
+          <Header height={90}>
             <AppHeader />
           </Header>
         }
@@ -37,7 +34,7 @@ const MasterLayout: React.FC<Props> = ({ children, title, description }) => {
           },
         })}
       >
-        <Container size="md">{children}</Container>
+        <Container size="xl">{children}</Container>
       </AppShell>
     </>
   );
