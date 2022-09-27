@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ActionIcon,
   Button,
@@ -7,14 +8,8 @@ import {
   Menu,
   Title,
 } from "@mantine/core";
-import {
-  IconHome2,
-  IconBell,
-  IconCurrencyBitcoin,
-  IconChevronDown,
-  IconCactus,
-} from "@tabler/icons";
-import React from "react";
+import { IconHome2, IconBell, IconCurrencyBitcoin } from "@tabler/icons";
+import { ConnectKitButton } from "connectkit";
 
 const menu = [
   {
@@ -67,13 +62,7 @@ const AppHeader = () => {
             BSC
           </Button>
 
-          <Button
-            size="md"
-            color="dark.6"
-            variant="filled"
-            leftIcon={<IconCactus />}
-            rightIcon={<IconChevronDown />}
-          ></Button>
+          <ConnectKitButton />
         </Group>
       </Group>
     </Container>
