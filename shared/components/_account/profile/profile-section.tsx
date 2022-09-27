@@ -1,7 +1,15 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import { Avatar, Divider, Group, Stack, Text, Title } from "@mantine/core";
+import {
+  Avatar,
+  Divider,
+  Group,
+  SimpleGrid,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 
 const UserInformationForm = dynamic(
   () => import("shared/components/_account/profile/user-information-form")
@@ -24,10 +32,18 @@ const ProfileSection = () => {
         </Stack>
       </Group>
 
-      <Group grow align="stretch">
+      <SimpleGrid
+        cols={2}
+        breakpoints={[
+          { maxWidth: "lg", cols: 2, spacing: "lg" },
+          { maxWidth: "md", cols: 2, spacing: "md" },
+          { maxWidth: "sm", cols: 1, spacing: "sm" },
+          { maxWidth: "xs", cols: 1, spacing: "sm" },
+        ]}
+      >
         <UserInformationForm />
         <UserWalletForm />
-      </Group>
+      </SimpleGrid>
     </Stack>
   );
 };

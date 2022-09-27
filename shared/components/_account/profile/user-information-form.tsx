@@ -46,7 +46,7 @@ const UserInformationForm: React.FC = () => {
         </ThemeIcon>
         <Title order={5}>INFORMATION</Title>
       </Group>
-      <Paper p={16}>
+      <Paper p={28}>
         <Stack>
           {items.map((n, idx) => (
             <React.Fragment key={idx}>

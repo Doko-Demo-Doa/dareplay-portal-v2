@@ -53,7 +53,7 @@ const UserWalletForm: React.FC = () => {
         <Title order={5}>MY WALLET</Title>
       </Group>
 
-      <Paper p={16} className="asdf" sx={{ flexGrow: 2 }}>
+      <Paper p={28} className="asdf" sx={{ flexGrow: 2 }}>
         <Stack>
           <Title order={3}>Wallet Address</Title>
           <Stack>

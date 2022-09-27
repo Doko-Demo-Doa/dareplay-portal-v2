@@ -1,9 +1,11 @@
 import {
   Anchor,
   Breadcrumbs,
-  Group,
+  Grid,
+  MediaQuery,
   NavLink,
   Paper,
+  Select,
   Stack,
 } from "@mantine/core";
 import dynamic from "next/dynamic";
@@ -24,6 +26,13 @@ const items = [
   </Anchor>
 ));
 
+const subItems = [
+  { label: "Profile", subpath: "/profile" },
+  { label: "Assets", subpath: "/assets" },
+  { label: "Activities", subpath: "/activities" },
+  { label: "Verification", subpath: "/verification" },
+];
+
 const Profile = () => {
   return (
     <>
@@ -32,16 +41,31 @@ const Profile = () => {
           {items}
         </Breadcrumbs>
 
-        <Group align="flex-start">
-          <Paper pt={10} pb={120} sx={{ width: 200 }}>
-            <NavLink px={40} py={16} label="Profile" />
-            <NavLink px={40} py={16} label="Assets" />
-            <NavLink px={40} py={16} label="Activities" />
-            <NavLink px={40} py={16} label="Verification" />
-          </Paper>
+        <MediaQuery largerThan="md" styles={{ display: "none" }}>
+          <Select
+            placeholder="Pick one"
+            data={subItems.map((n) => ({
+              value: n.subpath,
+              label: n.label,
+            }))}
+          />
+        </MediaQuery>
 
-          <ProfileSection />
-        </Group>
+        <Grid grow>
+          <Grid.Col sm={9} md={1}>
+            <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+              <Paper pt={10} pb={120} sx={{ width: 200 }}>
+                {subItems.map((n, idx) => (
+                  <NavLink key={idx} px={40} py={16} label={n.label} />
+                ))}
+              </Paper>
+            </MediaQuery>
+          </Grid.Col>
+
+          <Grid.Col sm={9} md={8}>
+            <ProfileSection />
+          </Grid.Col>
+        </Grid>
       </Stack>
     </>
   );
