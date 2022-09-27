@@ -21,7 +21,10 @@ const MasterLayout: React.FC<Props> = ({ children, title, description }) => {
       <AppShell
         padding="md"
         header={
-          <Header height={90}>
+          <Header
+            height={90}
+            sx={(theme) => ({ backgroundColor: theme.colors.dark[7] })}
+          >
             <AppHeader />
           </Header>
         }

@@ -1,13 +1,19 @@
 import {
+  ActionIcon,
   Button,
   Container,
   Group,
   Image,
   Menu,
-  Text,
   Title,
 } from "@mantine/core";
-import { IconHome2 } from "@tabler/icons";
+import {
+  IconHome2,
+  IconBell,
+  IconCurrencyBitcoin,
+  IconChevronDown,
+  IconCactus,
+} from "@tabler/icons";
 import React from "react";
 
 const menu = [
@@ -19,8 +25,13 @@ const menu = [
 
 const AppHeader = () => {
   return (
-    <Container size="xl" sx={{ height: "100%" }}>
-      <Group sx={{ height: "100%" }}>
+    <Container
+      size="xl"
+      sx={(theme) => {
+        return { height: "100%" };
+      }}
+    >
+      <Group sx={{ height: "100%" }} position="apart">
         <Group mr={40}>
           <Image
             src="/logos/dareplay-logo-revamped.svg"
@@ -28,18 +39,41 @@ const AppHeader = () => {
             width={70}
           />
           <Title>DarePlay</Title>
+
+          <Group>
+            {menu.map((n, idx) => (
+              <Menu key={idx} shadow="md" width={200}>
+                <Menu.Target>
+                  <Button leftIcon={n.icon} variant="subtle">
+                    Home
+                  </Button>
+                </Menu.Target>
+              </Menu>
+            ))}
+          </Group>
         </Group>
 
         <Group>
-          {menu.map((n, idx) => (
-            <Menu key={idx} shadow="md" width={200}>
-              <Menu.Target>
-                <Button leftIcon={n.icon} variant="subtle">
-                  Home
-                </Button>
-              </Menu.Target>
-            </Menu>
-          ))}
+          <ActionIcon size="xl" variant="filled">
+            <IconBell />
+          </ActionIcon>
+
+          <Button
+            size="md"
+            color="dark.6"
+            variant="filled"
+            leftIcon={<IconCurrencyBitcoin />}
+          >
+            BSC
+          </Button>
+
+          <Button
+            size="md"
+            color="dark.6"
+            variant="filled"
+            leftIcon={<IconCactus />}
+            rightIcon={<IconChevronDown />}
+          ></Button>
         </Group>
       </Group>
     </Container>

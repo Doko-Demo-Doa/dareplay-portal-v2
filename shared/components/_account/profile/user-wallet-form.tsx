@@ -55,6 +55,7 @@ const UserWalletForm: React.FC = () => {
 
       <Paper p={16} className="asdf" sx={{ flexGrow: 2 }}>
         <Stack>
+          <Title order={3}>Wallet Address</Title>
           <Stack>
             <Input
               disabled
@@ -69,6 +70,7 @@ const UserWalletForm: React.FC = () => {
             />
           </Stack>
           <Space />
+
           <Stack align="flex-end">
             <Input
               size="md"
@@ -79,7 +81,9 @@ const UserWalletForm: React.FC = () => {
               variant="filled"
               sx={{ width: "100%" }}
             />
-            <Button sx={{ width: "10rem" }}>Buy DNFT</Button>
+            <Button size="lg" sx={{ width: "10rem" }}>
+              Buy DNFT
+            </Button>
           </Stack>
           <Stack align="flex-end">
             <Input
@@ -91,7 +95,9 @@ const UserWalletForm: React.FC = () => {
               variant="filled"
               sx={{ width: "100%" }}
             />
-            <Button sx={{ width: "10rem" }}>Get DP</Button>
+            <Button size="lg" sx={{ width: "10rem" }}>
+              Get DP
+            </Button>
           </Stack>
         </Stack>
       </Paper>
