@@ -29,12 +29,17 @@ const MasterLayout: React.FC<Props> = ({ children, title, description }) => {
           main: {
             backgroundColor:
               theme.colorScheme === "dark"
-                ? theme.colors.dark[8]
+                ? theme.colors.pink[8]
                 : theme.colors.gray[0],
+            backgroundImage:
+              "radial-gradient(farthest-side at 50% 5%, #0c3c6a, #131c33, #131c33)",
           },
         })}
+        sx={{}}
       >
-        <Container size="xl">{children}</Container>
+        <Container sx={{}} size="xl">
+          {children}
+        </Container>
       </AppShell>
     </>
   );
