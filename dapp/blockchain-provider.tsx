@@ -14,7 +14,7 @@ import { extraChains } from "dapp/config";
 // Extra provider: BSC
 const bscTestnetChain: Chain = {
   id: extraChains.BSC_TESTNET,
-  name: "BNB",
+  name: "Binance Smartchain Testnet",
   network: "Binance Smartchain Testnet",
   nativeCurrency: {
     decimals: 18,
@@ -32,7 +32,7 @@ const bscTestnetChain: Chain = {
 
 const avalancheChain: Chain = {
   id: extraChains.AVALANCHE_C_CHAIN,
-  name: "AVAX",
+  name: "Avalanche C-Chain",
   network: "Avalanche C-Chain",
   nativeCurrency: {
     decimals: 18,
