@@ -1,100 +1,95 @@
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import {
+  mainnet,
+  goerli,
+  avalanche as avalancheRaw,
+  avalancheFuji as avalancheFujiRaw,
+  polygon as polygonRaw,
+  polygonMumbai as polygonMumbaiRaw,
   Chain,
-  configureChains,
-  createClient,
-  defaultChains,
-  WagmiConfig,
-} from "wagmi";
+} from "wagmi/chains";
+import { infuraProvider } from "wagmi/providers/infura";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+
 import { publicProvider } from "wagmi/providers/public";
-import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 
-import { extraChains } from "dapp/config";
+import { siwe } from "~/pages/api/siwe";
 
-// Extra provider: BSC
-const bscTestnetChain: Chain = {
-  id: extraChains.BSC_TESTNET,
-  name: "Binance Smartchain Testnet",
-  network: "Binance Smartchain Testnet",
-  nativeCurrency: {
-    decimals: 18,
-    name: "BSC",
-    symbol: "BNB",
-  },
-  rpcUrls: {
-    default: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-  },
-  blockExplorers: {
-    default: { name: "bscscan", url: "https://testnet.bscscan.com/" },
-  },
-  testnet: true,
-};
+const isMainnet = /production/.test(
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV || "development"
+);
 
-const avalancheChain: Chain = {
-  id: extraChains.AVALANCHE_C_CHAIN,
-  name: "Avalanche C-Chain",
-  network: "Avalanche C-Chain",
-  nativeCurrency: {
-    decimals: 18,
-    name: "AVAX",
-    symbol: "AVAX",
-  },
+const avalanche: Chain = {
+  ...avalancheRaw,
   rpcUrls: {
-    default: "https://api.avax.network/ext/bc/C/rpc",
-  },
-  blockExplorers: {
     default: {
-      name: "c-chain",
-      url: "https://snowtrace.io/",
+      http: ["https://api.avax.network/ext/bc/C/rpc"],
+      webSocket: ["wss://api.avax.network/ext/bc/C/rpc"],
     },
   },
-  testnet: false,
 };
 
-const avalancheTestnetChain: Chain = {
-  id: extraChains.BSC_TESTNET,
-  name: "AVAX",
-  network: "Avalanche Testnet",
-  nativeCurrency: {
-    decimals: 18,
-    name: "AVAX",
-    symbol: "AVAX",
-  },
+const avalancheFuji: Chain = {
+  ...avalancheFujiRaw,
   rpcUrls: {
-    default: "https://api.avax-test.network/ext/bc/C/rpc",
+    default: {
+      http: ["https://api.avax-test.network/ext/bc/C/rpc"],
+      webSocket: ["wss://api.avax-test.network/ext/bc/C/rpc"],
+    },
   },
-  blockExplorers: {
-    default: { name: "fuji-c-chain", url: "https://testnet.snowtrace.io/" },
+};
+
+const polygon: Chain = {
+  ...polygonRaw,
+  rpcUrls: {
+    default: {
+      http: ["https://polygon-rpc.com"],
+      webSocket: ["wss://polygon-rpc.com"],
+    },
   },
-  testnet: true,
+};
+
+const polygonMumbai: Chain = {
+  ...polygonMumbaiRaw,
+  rpcUrls: {
+    default: {
+      http: ["https://matic-mumbai.chainstacklabs.com"],
+      webSocket: ["wss://matic-mumbai.chainstacklabs.com"],
+    },
+  },
 };
 
 // Main wagmi configuration
-const { provider, chains } = configureChains(
-  [...defaultChains, bscTestnetChain, avalancheChain, avalancheTestnetChain],
+export const { provider, webSocketProvider, chains } = configureChains(
+  isMainnet
+    ? [mainnet, avalanche, polygon]
+    : [goerli, avalancheFuji, polygonMumbai],
   [
+    infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY || "" }),
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
     publicProvider(),
-    jsonRpcProvider({
-      rpc: (chain) => {
-        // if (chain.id !== extraChains.BSC_TESTNET) return null;
-        return { http: chain.rpcUrls.default };
-      },
-    }),
   ]
 );
 
 const client = createClient(
   getDefaultClient({
     autoConnect: true,
-    appName: "Rens",
+    appName: "Rens Metaverse",
+    alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
+    infuraId: process.env.NEXT_PUBLIC_INFURA_API_KEY,
     chains,
+    provider,
+    webSocketProvider,
   })
 );
 
 function BlockchainProvider(props: React.PropsWithChildren<{}>) {
   return (
     <WagmiConfig client={client}>
-      <ConnectKitProvider>{props.children}</ConnectKitProvider>
+      <siwe.Provider>
+        <ConnectKitProvider>{props.children}</ConnectKitProvider>
+      </siwe.Provider>
     </WagmiConfig>
   );
 }
