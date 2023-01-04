@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noImplicitAny": true,
     "jsx": "preserve",
     "incremental": true,
     "types": ["node", "react", "vitest/globals"],
@@ -22,8 +23,29 @@
       "~/pages/*": ["pages/*"],
       "~/shared/*": ["shared/*"],
       "~/dapp/*": ["dapp/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "types": [
+    "node",
+    "react",
+    "vitest/globals",
+    "cypress",
+    "@synthetixio/synpress/support",
+    "cypress-wait-until",
+    "@testing-library/cypress"
+  ],
+  "typeRoots": ["./node_modules/@types", "./types"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -2,6 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  experimental: {
+    appDir: true,
+  },
+  images: {
+    domains: ["storage.googleapis.com"],
+  },
+};
 
-module.exports = nextConfig
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
