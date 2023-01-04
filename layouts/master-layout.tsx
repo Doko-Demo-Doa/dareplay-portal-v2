@@ -1,4 +1,4 @@
-import { AppShell, Container, createStyles, Header } from "@mantine/core";
+import { AppShell, Container } from "@mantine/core";
 import Head from "next/head";
 
 import AppHeader from "~/shared/components/_common/app-header";

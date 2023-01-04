@@ -1,8 +1,6 @@
+"use client";
 import React from "react";
 import {
-  ActionIcon,
-  AspectRatio,
-  BackgroundImage,
   Box,
   Burger,
   Button,
@@ -12,22 +10,24 @@ import {
   Header,
   Image,
   Menu,
-  Paper,
   Title,
 } from "@mantine/core";
-import { IconHome2, IconBell, IconCurrencyBitcoin } from "@tabler/icons";
+import { IconHome2, IconCurrencyBitcoin, IconHome } from "@tabler/icons";
 import { ConnectKitButton } from "connectkit";
 
 const menu = [
   {
-    label: "Home",
+    label: "For Sale",
     icon: <IconHome2 />,
+  },
+  {
+    label: "For Rent",
+    icon: <IconHome />,
   },
 ];
 
 const useStyles = createStyles((theme) => ({
   header: {
-    backgroundColor: theme.colors.dark[7],
     height: 90,
     [`@media (max-width: ${theme.breakpoints.md}px)`]: {
       height: 60,
@@ -93,20 +93,15 @@ const AppHeader = () => {
           </Group>
 
           <Group className={classes.menu}>
-            <ActionIcon size="xl" variant="filled">
-              <IconBell />
-            </ActionIcon>
-
-            <Button
-              size="md"
-              color="dark.6"
-              variant="filled"
-              leftIcon={<IconCurrencyBitcoin />}
-            >
-              BSC
-            </Button>
-
-            <ConnectKitButton />
+            <ConnectKitButton.Custom>
+              {({ show }) => {
+                return (
+                  <Button color="red.4" size="lg" onClick={show}>
+                    Connect Wallet
+                  </Button>
+                );
+              }}
+            </ConnectKitButton.Custom>
           </Group>
 
           <Box className={classes.menuMobile}>
