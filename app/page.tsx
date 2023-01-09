@@ -1,3 +1,11 @@
+"use client";
+import { Box } from "@mantine/core";
+import HeadlineSection from "./_headline";
+
 export default function Page() {
-  return <h1 style={{ marginTop: "10rem" }}>Hello, Next.js!</h1>;
+  return (
+    <>
+      <HeadlineSection />
+    </>
+  );
 }

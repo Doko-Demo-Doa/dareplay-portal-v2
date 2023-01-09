@@ -1,6 +1,6 @@
 "use client";
 
-import { AppShell } from "@mantine/core";
+import { AppShell, Box } from "@mantine/core";
 import { Poppins } from "@next/font/google";
 
 import BlockchainProvider from "~/dapp/blockchain-provider";
@@ -33,6 +33,7 @@ export default function RootLayout({ children }: Props) {
             })}
             sx={{}}
           >
+            <Box sx={{ height: "5.2rem" }} />
             {children}
           </AppShell>
         </BlockchainProvider>

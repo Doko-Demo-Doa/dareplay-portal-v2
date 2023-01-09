@@ -10,19 +10,18 @@ import {
   Header,
   Image,
   Menu,
+  TextInput,
   Title,
 } from "@mantine/core";
-import { IconHome2, IconCurrencyBitcoin, IconHome } from "@tabler/icons";
+import { IconCurrencyBitcoin, IconSearch } from "@tabler/icons";
 import { ConnectKitButton } from "connectkit";
 
 const menu = [
   {
     label: "For Sale",
-    icon: <IconHome2 />,
   },
   {
     label: "For Rent",
-    icon: <IconHome />,
   },
 ];
 
@@ -59,7 +58,7 @@ const AppHeader = () => {
   const { classes } = useStyles();
 
   return (
-    <Header className={classes.header} height={90}>
+    <Header className={classes.header} height={90} fixed>
       <Container
         size="xl"
         sx={() => {
@@ -83,9 +82,7 @@ const AppHeader = () => {
               {menu.map((n, idx) => (
                 <Menu key={idx} shadow="md" width={200}>
                   <Menu.Target>
-                    <Button leftIcon={n.icon} variant="subtle">
-                      {n.label}
-                    </Button>
+                    <Button variant="subtle">{n.label}</Button>
                   </Menu.Target>
                 </Menu>
               ))}
@@ -93,6 +90,13 @@ const AppHeader = () => {
           </Group>
 
           <Group className={classes.menu}>
+            <TextInput
+              size="lg"
+              variant="filled"
+              w="24rem"
+              placeholder="Search for games, collections or items"
+              rightSection={<IconSearch size={14} />}
+            />
             <ConnectKitButton.Custom>
               {({ show }) => {
                 return (
@@ -114,9 +118,7 @@ const AppHeader = () => {
                 <Menu.Label>Navigation</Menu.Label>
 
                 {menu.map((n, idx) => (
-                  <Menu.Item key={idx} icon={n.icon}>
-                    {n.label}
-                  </Menu.Item>
+                  <Menu.Item key={idx}>{n.label}</Menu.Item>
                 ))}
 
                 <Menu.Divider />
